@@ -8,7 +8,7 @@ namespace curdoperationsReact.Interfaces
 {
     public interface IuserLoginDetails
     {
-        public List<UserDetails> GetData(int searchType, string searchText);
+        public List<UserDetails> GetUserData(int searchType, string searchText);
         public int writedata(UserDetails userDetails);
 
     }

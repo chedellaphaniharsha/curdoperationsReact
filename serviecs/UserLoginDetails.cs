@@ -18,7 +18,7 @@ namespace curdoperationsReact.serviecs
         {
 
         }
-        public List<UserDetails> GetData(int searchType, string searchText)
+        public List<UserDetails> GetUserData(int searchType, string searchText)
         {
             List<UserDetails> userDetails = new List<UserDetails>();
 

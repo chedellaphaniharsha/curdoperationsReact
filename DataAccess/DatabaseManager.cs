@@ -18,26 +18,34 @@ namespace curdoperationsReact.DataAccess
         public DataTable ReadData(string commenttext, SqlParameter[] parameters)
         {
             DataTable dataTable = new DataTable();
-
-            using (SqlConnection connection = new SqlConnection(connectionstring))
+            try
             {
-                //connection.Open();
-                using (SqlCommand command = new SqlCommand(commenttext, connection))
+
+                using (SqlConnection connection = new SqlConnection(connectionstring))
                 {
-                    command.CommandType = CommandType.StoredProcedure;
-                    command.Parameters.Add(parameters);
-
-                    using (SqlDataReader reader = command.ExecuteReader())
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand(commenttext, connection))
                     {
-                        dataTable.Load(reader);
-                        reader.Close();
-                    }
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddRange(parameters);
 
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            dataTable.Load(reader);
+                        }
+
+                    }
+                    connection.Close();
                 }
-                connection.Close();
             }
-                        return dataTable;
+            catch (Exception ex)
+            {
+                ex.ToString();
+            }
+            return dataTable;
         }
+                       
+        
         public int WriteData(string commenttext, SqlParameter[] parameters)
         {
             int result = 0;

@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.SwaggerGen;
+using Swashbuckle.AspNetCore.SwaggerUI;
 
 namespace curdoperationsReact
 {
@@ -23,7 +26,16 @@ namespace curdoperationsReact
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddTransient<UserLoginDetails>();
+            services.AddScoped<IuserLoginDetails, UserLoginDetails>();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Your API", Version = "v1" });
+
+                // Optional: Configure additional Swagger options
+                // For example, to include XML comments in the generated Swagger document:
+                // string xmlDocFile = Path.Combine(AppContext.BaseDirectory, $"{Assembly.GetExecutingAssembly().GetName().Name}.xml");
+                // c.IncludeXmlComments(xmlDocFile);
+            });
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -50,6 +62,14 @@ namespace curdoperationsReact
             app.UseSpaStaticFiles();
 
             app.UseRouting();
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Your API v1");
+                // Optional: Configure additional Swagger UI options
+                // For example, to set the Swagger UI to display at the root URL:
+                // c.RoutePrefix = string.Empty;
+            });
 
             app.UseEndpoints(endpoints =>
             {
