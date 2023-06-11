@@ -51,17 +51,16 @@ namespace curdoperationsReact.serviecs
 
 
             SqlParameter[] sqlparameter = new SqlParameter[] {
-              new SqlParameter("@Username", userDetails.Username ),
-              new SqlParameter("@password", userDetails.password),
-              new SqlParameter("@EmailId",  userDetails.EmailId),
-              new SqlParameter("@BloadGrup",userDetails.BloadGru ),
-              new SqlParameter("@CreateAT", userDetails.CreateAT),
-              new SqlParameter("@UpdateAT", userDetails.UpdateAT),
-
+             new SqlParameter("@Username", SqlDbType.NVarChar) { Value = userDetails.Username, Size = 50 },
+             new SqlParameter("@password", SqlDbType.NVarChar) { Value = userDetails.password, Size = 50 },
+             new SqlParameter("@EmailId", SqlDbType.NVarChar) { Value = userDetails.EmailId, Size = 50 },
+             new SqlParameter("@BloadGrup", SqlDbType.NVarChar) { Value = userDetails.BloadGru, Size = 50 },
+             new SqlParameter("@CreateAT", SqlDbType.DateTime){ Value=userDetails.CreateAT },
+             new SqlParameter("@UpdateAT", SqlDbType.DateTime){ Value=userDetails.UpdateAT },
             };
 
             int result = databaseManager.WriteData("NCRE_USER_Insert", sqlparameter);
-            return 1;
+            return result;
 
         }
 

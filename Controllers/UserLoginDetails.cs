@@ -31,10 +31,13 @@ namespace curdoperationsReact.Controllers
 
         [HttpPost]
         [Route("InsertUserDetails")]
-        public int WriteUserDetail([FromBody] UserDetails userDetails)
+        public Response WriteUserDetail([FromBody] UserDetails userDetails)
         {
-            int result = _IuserLoginDetails.writedata(userDetails);
-            return result;
+            Response response = new Response();
+            response.result = _IuserLoginDetails.writedata(userDetails);
+            response.message = (response.result == 1) ? Status.SuccessfullyRegistered.ToString() : Status.ExceptionOccurred.ToString();
+
+            return response;
         }
 
 

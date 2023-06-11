@@ -49,14 +49,28 @@ namespace curdoperationsReact.DataAccess
         public int WriteData(string commenttext, SqlParameter[] parameters)
         {
             int result = 0;
-            using (SqlConnection connection = new SqlConnection(connectionstring))
+            try
             {
-                using (SqlCommand command = new SqlCommand(commenttext, connection))
+                using (SqlConnection connection = new SqlConnection(connectionstring))
                 {
-                    
-                    command.Parameters.Add(parameters);
-                    result = command.ExecuteNonQuery();
+                    connection.Open();
+              
+                    using (SqlCommand command = new SqlCommand(commenttext, connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddRange(parameters);
+                        result = command.ExecuteNonQuery();
+                       
+                    }
+                    connection.Close();
                 }
+              
+            }
+            catch(Exception ex)
+            {
+                result = 2;
+                ex.ToString();
+
             }
                 return result;
         }
