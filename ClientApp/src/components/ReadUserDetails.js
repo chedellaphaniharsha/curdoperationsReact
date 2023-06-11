@@ -1,9 +1,9 @@
 import React from 'react'
 
-const read = () => {
+const ReadUserDetails = () => {
   return (
-    <div>read</div>
+    <div>ReadUserDetails</div>
   )
 }
 
-export default read
+export default ReadUserDetails
