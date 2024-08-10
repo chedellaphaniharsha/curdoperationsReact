@@ -20,6 +20,7 @@ namespace curdoperationsReact
             //IConfiguration configuration = new ConfigurationBuilder()
             //    .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
             //    .AddJsonFile("appsettings.json").Build();
+            /// test of changed remote url github to azure respo url 
            
 
             //DataAccess.DatabaseManager dAL = new DataAccess.DatabaseManager(configuration.GetConnectionString("constr"));
