@@ -32,6 +32,7 @@ namespace curdoperationsReact
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Your API", Version = "v1" });
                 //checking the commit in azure devops 
                 //checking the commit in azure devops 
+                //checking the commit in azure devops 
 
                 // Optional: Configure additional Swagger options
                 // For example, to include XML comments in the generated Swagger document:
